@@ -316,8 +316,7 @@ namespace WebShopCleanCode
                                     }
                                     break;
                                 case 4:
-                                    Console.WriteLine("Please write your username.");
-                                    string newUsername = Console.ReadLine();
+                                    string newUsername = SetValue("Please write your username.")
                                     foreach (Customer customer in customers)
                                     {
                                         if (customer.Username.Equals(username))
@@ -338,8 +337,7 @@ namespace WebShopCleanCode
                                     string phoneNumber;
                                     while (true)
                                     {
-                                        Console.WriteLine("Do you want a password? y/n");
-                                        choice = Console.ReadLine();
+                                        choice = SetValue("Do you want a password? y/n")
                                         if (choice.Equals("y"))
                                         {
                                             while (true)
@@ -394,8 +392,7 @@ namespace WebShopCleanCode
                                     }
                                     while (true)
                                     {
-                                        Console.WriteLine("Do you want a last name? y/n");
-                                        choice = Console.ReadLine();
+                                        choice = SetValue("Do you want a last name? y/n")
                                         if (choice.Equals("y"))
                                         {
                                             while (true)
@@ -422,8 +419,7 @@ namespace WebShopCleanCode
                                     }
                                     while (true)
                                     {
-                                        Console.WriteLine("Do you want an email? y/n");
-                                        choice = Console.ReadLine();
+                                        choice = SetValue("Do you want an email? y/n")
                                         if (choice.Equals("y"))
                                         {
                                             while (true)
