@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
@@ -15,6 +16,7 @@ namespace WebShopCleanCode
         List<Product> products = new List<Product>();
         List<Customer> customers = new List<Customer>();
         private OutputHandler outputHandler = new OutputHandler();
+        Menu mainMenu = new MainMenu();
 
         string currentMenu = "main menu";
         int currentChoice = 1;
@@ -52,30 +54,10 @@ namespace WebShopCleanCode
                 }
                 else
                 {
-                    Console.WriteLine("1: " + option1);
-                    Console.WriteLine("2: " + option2);
-                    if (amountOfOptions > 2)
-                    {
-                        Console.WriteLine("3: " + option3);
-                    }
-                    if (amountOfOptions > 3)
-                    {
-                        Console.WriteLine("4: " + option4);
-                    }
+                    DisplayOptions();
                 }
 
-                for (int i = 0; i < amountOfOptions; i++)
-                {
-                    Console.Write(i + 1 + "\t");
-                }
-                Console.WriteLine();
-                for (int i = 1; i < currentChoice; i++)
-                {
-                    Console.Write("\t");
-                }
-                Console.WriteLine("|");
-
-                Console.WriteLine("Your buttons are Left, Right, OK, Back and Quit.");
+                DisplayNavigation();
                 if (currentCustomer != null)
                 {
                     Console.WriteLine("Current user: " + currentCustomer.Username);
@@ -696,7 +678,39 @@ namespace WebShopCleanCode
             }
         }
 
-        
+        private void DisplayOptions()
+        {
+            Console.WriteLine("1: " + option1);
+            Console.WriteLine("2: " + option2);
+            if (amountOfOptions > 2)
+            {
+                Console.WriteLine("3: " + option3);
+            }
+
+            if (amountOfOptions > 3)
+            {
+                Console.WriteLine("4: " + option4);
+            }
+        }
+
+        private void DisplayNavigation()
+        {
+            for (int i = 0; i < amountOfOptions; i++)
+            {
+                Console.Write(i + 1 + "\t");
+            }
+
+            Console.WriteLine();
+            for (int i = 1; i < currentChoice; i++)
+            {
+                Console.Write("\t");
+            }
+
+            Console.WriteLine("|");
+
+            Console.WriteLine("Your buttons are Left, Right, OK, Back and Quit.");
+        }
+
 
         private void bubbleSort(string variable, bool ascending)
         {
