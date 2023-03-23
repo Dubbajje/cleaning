@@ -16,7 +16,7 @@ namespace WebShopCleanCode
         List<Product> products = new List<Product>();
         List<Customer> customers = new List<Customer>();
         private OutputHandler outputHandler = new OutputHandler();
-        Menu mainMenu = new MainMenu();
+        Menu menu = new MainMenu();
 
         string currentMenu = "main menu";
         int currentChoice = 1;
@@ -46,15 +46,11 @@ namespace WebShopCleanCode
                 
                 if (currentMenu.Equals("purchase menu"))
                 {
-                    for (int i = 0; i < amountOfOptions; i++)
-                    {
-                        Console.WriteLine(i + 1 + ": " + products[i].Name + ", " + products[i].Price + "kr");
-                    }
-                    Console.WriteLine("Your funds: " + currentCustomer.Funds);
+                    ShowProducts();
                 }
                 else
                 {
-                    DisplayOptions();
+                    menu.DisplayOptions();
                 }
 
                 DisplayNavigation();
@@ -153,40 +149,9 @@ namespace WebShopCleanCode
                                     break;
                             }
                         }
-                        else if (currentMenu.Equals("customer menu")) {
-                            switch (currentChoice)
-                            {
-                                case 1:
-                                    currentCustomer.PrintOrders();
-                                    break;
-                                case 2:
-                                    currentCustomer.PrintInfo();
-                                    break;
-                                case 3:
-                                    Console.WriteLine("How many funds would you like to add?");
-                                    string amountString = Console.ReadLine();
-                                    try
-                                    {
-                                        int amount = int.Parse(amountString);
-                                        if (amount < 0)
-                                        {
-                                            outputHandler.DisplayMessage("Don't add negative amounts.");
-                                        }
-                                        else
-                                        {
-                                            currentCustomer.Funds += amount;
-                                            outputHandler.DisplayMessageWithArgument(amountString, " added to your profile.");
-                                        }
-                                    }
-                                    catch (FormatException e)
-                                    {
-                                        outputHandler.DisplayMessage("Please write a number next time.");
-                                    }
-                                    break;
-                                default:
-                                    outputHandler.DisplayMessage("Not an option.");
-                                    break;
-                            }
+                        else if (currentMenu.Equals("customer menu"))
+                        {
+                            Addfunds();
                         }
                         else if (currentMenu.Equals("sort menu"))
                         {
@@ -678,20 +643,54 @@ namespace WebShopCleanCode
             }
         }
 
-        private void DisplayOptions()
+        private void Addfunds()
         {
-            Console.WriteLine("1: " + option1);
-            Console.WriteLine("2: " + option2);
-            if (amountOfOptions > 2)
+            switch (currentChoice)
             {
-                Console.WriteLine("3: " + option3);
-            }
+                case 1:
+                    currentCustomer.PrintOrders();
+                    break;
+                case 2:
+                    currentCustomer.PrintInfo();
+                    break;
+                case 3:
+                    Console.WriteLine("How many funds would you like to add?");
+                    string amountString = Console.ReadLine();
+                    try
+                    {
+                        int amount = int.Parse(amountString);
+                        if (amount < 0)
+                        {
+                            outputHandler.DisplayMessage("Don't add negative amounts.");
+                        }
+                        else
+                        {
+                            currentCustomer.Funds += amount;
+                            outputHandler.DisplayMessageWithArgument(amountString, " added to your profile.");
+                        }
+                    }
+                    catch (FormatException e)
+                    {
+                        outputHandler.DisplayMessage("Please write a number next time.");
+                    }
 
-            if (amountOfOptions > 3)
-            {
-                Console.WriteLine("4: " + option4);
+                    break;
+                default:
+                    outputHandler.DisplayMessage("Not an option.");
+                    break;
             }
         }
+
+        public void ShowProducts()
+        {
+            for (int i = 0; i < amountOfOptions; i++)
+            {
+                Console.WriteLine(i + 1 + ": " + products[i].Name + ", " + products[i].Price + "kr");
+            }
+
+            Console.WriteLine("Your funds: " + currentCustomer.Funds);
+        }
+
 
         private void DisplayNavigation()
         {
