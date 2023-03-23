@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\nikla\\source\\repos\\WebShopCleanCode\\WebShopCleanCode\\WebShopCleanCode.csproj": {}
+    "C:\\Users\\debbi\\oop avancerad\\git webshop\\cleaning\\WebShopCleanCode\\WebShopCleanCode\\WebShopCleanCode.csproj": {}
   },
   "projects": {
-    "C:\\Users\\nikla\\source\\repos\\WebShopCleanCode\\WebShopCleanCode\\WebShopCleanCode.csproj": {
+    "C:\\Users\\debbi\\oop avancerad\\git webshop\\cleaning\\WebShopCleanCode\\WebShopCleanCode\\WebShopCleanCode.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\nikla\\source\\repos\\WebShopCleanCode\\WebShopCleanCode\\WebShopCleanCode.csproj",
+        "projectUniqueName": "C:\\Users\\debbi\\oop avancerad\\git webshop\\cleaning\\WebShopCleanCode\\WebShopCleanCode\\WebShopCleanCode.csproj",
         "projectName": "WebShopCleanCode",
-        "projectPath": "C:\\Users\\nikla\\source\\repos\\WebShopCleanCode\\WebShopCleanCode\\WebShopCleanCode.csproj",
-        "packagesPath": "C:\\Users\\nikla\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\nikla\\source\\repos\\WebShopCleanCode\\WebShopCleanCode\\obj\\",
+        "projectPath": "C:\\Users\\debbi\\oop avancerad\\git webshop\\cleaning\\WebShopCleanCode\\WebShopCleanCode\\WebShopCleanCode.csproj",
+        "packagesPath": "C:\\Users\\debbi\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\debbi\\oop avancerad\\git webshop\\cleaning\\WebShopCleanCode\\WebShopCleanCode\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\nikla\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\debbi\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -59,7 +59,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.201\\RuntimeIdentifierGraph.json"
         }
       }
     }
