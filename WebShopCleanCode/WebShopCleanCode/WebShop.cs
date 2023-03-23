@@ -329,13 +329,13 @@ namespace WebShopCleanCode
                                     // Would have liked to be able to quit at any time in here.
                                     choice = "";
                                     bool next = false;
-                                    string newPassword = null;
-                                    string firstName = null;
-                                    string lastName = null;
-                                    string email = null;
-                                    int age = -1;
-                                    string address = null;
-                                    string phoneNumber = null;
+                                    string password;
+                                    string firstName;
+                                    string lastName;
+                                    string email;
+                                    int age;
+                                    string address;
+                                    string phoneNumber;
                                     while (true)
                                     {
                                         Console.WriteLine("Do you want a password? y/n");
@@ -344,9 +344,8 @@ namespace WebShopCleanCode
                                         {
                                             while (true)
                                             {
-                                                Console.WriteLine("Please write your password.");
-                                                newPassword = Console.ReadLine();
-                                                if (newPassword.Equals(""))
+                                                password = SetValue("Please write your password.");
+                                                if (password.Equals(""))
                                                 {
                                                     outputHandler.DisplayMessage("Please actually write something.");
                                                     continue;
@@ -373,8 +372,7 @@ namespace WebShopCleanCode
                                         {
                                             while (true)
                                             {
-                                                Console.WriteLine("Please write your first name.");
-                                                firstName = Console.ReadLine();
+                                                firstName = SetValue("Please write your first name.");
                                                 if (firstName.Equals(""))
                                                 {
                                                     outputHandler.DisplayMessage("Please actually write something.");
@@ -402,8 +400,7 @@ namespace WebShopCleanCode
                                         {
                                             while (true)
                                             {
-                                                Console.WriteLine("Please write your last name.");
-                                                lastName = Console.ReadLine();
+                                                lastName = SetValue("Please write your last name.");
                                                 if (lastName.Equals(""))
                                                 {
                                                     outputHandler.DisplayMessage("Please actually write something.");
@@ -431,8 +428,8 @@ namespace WebShopCleanCode
                                         {
                                             while (true)
                                             {
-                                                Console.WriteLine("Please write your email.");
-                                                email = Console.ReadLine();
+
+                                                email = SetValue("Please write your email.");
                                                 if (email.Equals(""))
                                                 {
                                                     outputHandler.DisplayMessage("Please actually write something.");
@@ -460,8 +457,7 @@ namespace WebShopCleanCode
                                         {
                                             while (true)
                                             {
-                                                Console.WriteLine("Please write your age.");
-                                                string ageString = Console.ReadLine();
+                                                string ageString = SetValue("Please write your age.");
                                                 try
                                                 {
                                                     age = int.Parse(ageString);
@@ -490,8 +486,7 @@ namespace WebShopCleanCode
                                         {
                                             while (true)
                                             {
-                                                Console.WriteLine("Please write your address.");
-                                                address = Console.ReadLine();
+                                                address = SetValue("Please write your address.");
                                                 if (address.Equals(""))
                                                 {
                                                     outputHandler.DisplayMessage("Please actually write something.");
@@ -519,8 +514,7 @@ namespace WebShopCleanCode
                                         {
                                             while (true)
                                             {
-                                                Console.WriteLine("Please write your phone number.");
-                                                phoneNumber = Console.ReadLine();
+                                                phoneNumber = SetValue("Please write your phone number.");
                                                 if (phoneNumber.Equals(""))
                                                 {
                                                     outputHandler.DisplayMessage("Please actually write something.");
@@ -540,7 +534,11 @@ namespace WebShopCleanCode
                                         outputHandler.DisplayMessage("y or n, please.");
                                     }
 
-                                    Customer newCustomer = new Customer(newUsername, newPassword, firstName, lastName, email, age, address, phoneNumber);
+                                    CustomerBuilder customerBuilder = new CustomerBuilder();
+                                    Customer customer1 = customerBuilder.SetUsername(username).SetPassword(password)
+                                        .SetFirstname(firstName).SetEmail(email).SetAge(age).SetAddress(address).SetPhoneNumber(phoneNumber).Build();
+
+                                    Customer newCustomer = new Customer(newUsername, password, firstName, lastName, email, age, address, phoneNumber);
                                     customers.Add(newCustomer);
                                     currentCustomer = newCustomer;
                                     Console.WriteLine();
@@ -641,6 +639,13 @@ namespace WebShopCleanCode
                         break;
                 }
             }
+        }
+
+        private string? SetValue(string message)
+        {
+            Console.WriteLine(message);
+            string value = Console.ReadLine();
+            return value;
         }
 
         private void Addfunds()

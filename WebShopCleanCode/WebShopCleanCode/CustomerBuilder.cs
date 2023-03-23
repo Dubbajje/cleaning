@@ -10,7 +10,6 @@ public class CustomerBuilder
     private int age = 0;
     private string address = "";
     private string phoneNumber = "";
-    private int funds = 0;
 
     public CustomerBuilder SetUsername(string username)
     {
@@ -56,9 +55,10 @@ public class CustomerBuilder
         return this;
     }
 
-    public CustomerBuilder SetFunds(int funds)
+    
+
+    public Customer Build()
     {
-        this.funds = funds;
-        return this;
+        return new Customer(username, password, firstName, lastName, email, age, address, phoneNumber);
     }
 }
