@@ -1,0 +1,15 @@
+C:\Users\nikla\source\repos\WebShopCleanCode\WebShopCleanCode\bin\Debug\net6.0\WebShopCleanCode.exe
+C:\Users\nikla\source\repos\WebShopCleanCode\WebShopCleanCode\bin\Debug\net6.0\WebShopCleanCode.deps.json
+C:\Users\nikla\source\repos\WebShopCleanCode\WebShopCleanCode\bin\Debug\net6.0\WebShopCleanCode.runtimeconfig.json
+C:\Users\nikla\source\repos\WebShopCleanCode\WebShopCleanCode\bin\Debug\net6.0\WebShopCleanCode.dll
+C:\Users\nikla\source\repos\WebShopCleanCode\WebShopCleanCode\bin\Debug\net6.0\WebShopCleanCode.pdb
+C:\Users\nikla\source\repos\WebShopCleanCode\WebShopCleanCode\obj\Debug\net6.0\WebShopCleanCode.csproj.AssemblyReference.cache
+C:\Users\nikla\source\repos\WebShopCleanCode\WebShopCleanCode\obj\Debug\net6.0\WebShopCleanCode.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\nikla\source\repos\WebShopCleanCode\WebShopCleanCode\obj\Debug\net6.0\WebShopCleanCode.AssemblyInfoInputs.cache
+C:\Users\nikla\source\repos\WebShopCleanCode\WebShopCleanCode\obj\Debug\net6.0\WebShopCleanCode.AssemblyInfo.cs
+C:\Users\nikla\source\repos\WebShopCleanCode\WebShopCleanCode\obj\Debug\net6.0\WebShopCleanCode.csproj.CoreCompileInputs.cache
+C:\Users\nikla\source\repos\WebShopCleanCode\WebShopCleanCode\obj\Debug\net6.0\WebShopCleanCode.dll
+C:\Users\nikla\source\repos\WebShopCleanCode\WebShopCleanCode\obj\Debug\net6.0\refint\WebShopCleanCode.dll
+C:\Users\nikla\source\repos\WebShopCleanCode\WebShopCleanCode\obj\Debug\net6.0\WebShopCleanCode.pdb
+C:\Users\nikla\source\repos\WebShopCleanCode\WebShopCleanCode\obj\Debug\net6.0\WebShopCleanCode.genruntimeconfig.cache
+C:\Users\nikla\source\repos\WebShopCleanCode\WebShopCleanCode\obj\Debug\net6.0\ref\WebShopCleanCode.dll
