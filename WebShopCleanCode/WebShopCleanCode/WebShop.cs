@@ -31,10 +31,11 @@ namespace WebShopCleanCode
         string password = null;
         Customer currentCustomer;
 
-        public WebShop()
+        public WebShop(CustomerBuilder customerBuilder)
         {
             products = database.GetProducts();
             customers = database.GetCustomers();
+            customerBuilder = new CustomerBuilder()
         }
 
         public void Run()
