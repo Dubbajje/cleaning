@@ -17,6 +17,7 @@ namespace WebShopCleanCode
         List<Customer> customers = new List<Customer>();
         private OutputHandler outputHandler = new OutputHandler();
         Menu menu = new MainMenu();
+        private Navigation navigation = new Navigation();
 
         string currentMenu = "main menu";
         int currentChoice = 1;
@@ -35,7 +36,7 @@ namespace WebShopCleanCode
         {
             products = database.GetProducts();
             customers = database.GetCustomers();
-            customerBuilder = new CustomerBuilder()
+            customerBuilder = new CustomerBuilder();
         }
 
         public void Run()
@@ -54,7 +55,7 @@ namespace WebShopCleanCode
                     menu.DisplayOptions();
                 }
 
-                DisplayNavigation();
+                navigation.DisplayNavigation();
                 if (currentCustomer != null)
                 {
                     Console.WriteLine("Current user: " + currentCustomer.Username);
@@ -108,14 +109,7 @@ namespace WebShopCleanCode
                                 case 2:
                                     if (currentCustomer != null)
                                     {
-                                        option1 = "See your orders";
-                                        option2 = "Set your info";
-                                        option3 = "Add funds";
-                                        option4 = "";
-                                        amountOfOptions = 3;
-                                        currentChoice = 1;
-                                        info = "What would you like to do?";
-                                        currentMenu = "customer menu";
+                                        Customermenu();
                                     }
                                     else
                                     {
@@ -125,16 +119,7 @@ namespace WebShopCleanCode
                                 case 3:
                                     if (currentCustomer == null)
                                     {
-                                        option1 = "Set Username";
-                                        option2 = "Set Password";
-                                        option3 = "Login";
-                                        option4 = "Register";
-                                        amountOfOptions = 4;
-                                        currentChoice = 1;
-                                        info = "Please submit username and password.";
-                                        username = null;
-                                        password = null;
-                                        currentMenu = "login menu";
+                                        NoCustomerMenu();
                                     }
                                     else
                                     {
@@ -264,6 +249,13 @@ namespace WebShopCleanCode
                         }
                         else if (currentMenu.Equals("login menu"))
                         {
+                            string password = "";
+                            string firstName = "";
+                            string lastName = "";
+                            string email = "";
+                            int age = 0;
+                            string address = "";
+                            string phoneNumber = "";
                             switch (currentChoice)
                             {
                                 case 1:
@@ -317,7 +309,7 @@ namespace WebShopCleanCode
                                     }
                                     break;
                                 case 4:
-                                    string newUsername = SetValue("Please write your username.")
+                                    string newUsername = SetValue("Please write your username.");
                                     foreach (Customer customer in customers)
                                     {
                                         if (customer.Username.Equals(username))
@@ -329,16 +321,11 @@ namespace WebShopCleanCode
                                     // Would have liked to be able to quit at any time in here.
                                     choice = "";
                                     bool next = false;
-                                    string password;
-                                    string firstName;
-                                    string lastName;
-                                    string email;
-                                    int age;
-                                    string address;
-                                    string phoneNumber;
+                                    
+                                   
                                     while (true)
                                     {
-                                        choice = SetValue("Do you want a password? y/n")
+                                        choice = SetValue("Do you want a password? y/n");
                                         if (choice.Equals("y"))
                                         {
                                             while (true)
@@ -393,7 +380,7 @@ namespace WebShopCleanCode
                                     }
                                     while (true)
                                     {
-                                        choice = SetValue("Do you want a last name? y/n")
+                                        choice = SetValue("Do you want a last name? y/n");
                                         if (choice.Equals("y"))
                                         {
                                             while (true)
@@ -420,7 +407,7 @@ namespace WebShopCleanCode
                                     }
                                     while (true)
                                     {
-                                        choice = SetValue("Do you want an email? y/n")
+                                        choice = SetValue("Do you want an email? y/n");
                                         if (choice.Equals("y"))
                                         {
                                             while (true)
@@ -535,11 +522,11 @@ namespace WebShopCleanCode
                                     Customer customer1 = customerBuilder.SetUsername(username).SetPassword(password)
                                         .SetFirstname(firstName).SetEmail(email).SetAge(age).SetAddress(address).SetPhoneNumber(phoneNumber).Build();
 
-                                    Customer newCustomer = new Customer(newUsername, password, firstName, lastName, email, age, address, phoneNumber);
-                                    customers.Add(newCustomer);
-                                    currentCustomer = newCustomer;
+                                    //Customer newCustomer = new Customer(newUsername, password, firstName, lastName, email, age, address, phoneNumber);
+                                    customers.Add(customer1);
+                                    currentCustomer = customer1;
                                     Console.WriteLine();
-                                    Console.WriteLine(newCustomer.Username + " successfully added and is now logged in.");
+                                    Console.WriteLine(customer1.Username + " successfully added and is now logged in.");
                                     Console.WriteLine();
                                     option1 = "See Wares";
                                     option2 = "Customer Info";
@@ -638,6 +625,32 @@ namespace WebShopCleanCode
             }
         }
 
+        private void NoCustomerMenu()
+        {
+            option1 = "Set Username";
+            option2 = "Set Password";
+            option3 = "Login";
+            option4 = "Register";
+            amountOfOptions = 4;
+            currentChoice = 1;
+            info = "Please submit username and password.";
+            username = null;
+            password = null;
+            currentMenu = "login menu";
+        }
+
+        private void Customermenu()
+        {
+            option1 = "See your orders";
+            option2 = "Set your info";
+            option3 = "Add funds";
+            option4 = "";
+            amountOfOptions = 3;
+            currentChoice = 1;
+            info = "What would you like to do?";
+            currentMenu = "customer menu";
+        }
+
         private string? SetValue(string message)
         {
             Console.WriteLine(message);
@@ -694,23 +707,7 @@ namespace WebShopCleanCode
         }
 
 
-        private void DisplayNavigation()
-        {
-            for (int i = 0; i < amountOfOptions; i++)
-            {
-                Console.Write(i + 1 + "\t");
-            }
-
-            Console.WriteLine();
-            for (int i = 1; i < currentChoice; i++)
-            {
-                Console.Write("\t");
-            }
-
-            Console.WriteLine("|");
-
-            Console.WriteLine("Your buttons are Left, Right, OK, Back and Quit.");
-        }
+        
 
 
         private void bubbleSort(string variable, bool ascending)

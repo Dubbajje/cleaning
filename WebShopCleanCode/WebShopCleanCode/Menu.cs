@@ -3,6 +3,7 @@ namespace WebShopCleanCode;
 public abstract class Menu
 {
     
+    
     protected string currentMenu { get; set; }
     protected  int currentChoice;
     protected int amountOfOptions;
