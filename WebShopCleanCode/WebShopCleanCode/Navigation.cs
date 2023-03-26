@@ -2,10 +2,22 @@ namespace WebShopCleanCode;
 
 public class Navigation
 {
-    private int amountOfOptions = 0;
-    private int currentChoice = 0;
-    private Button buttonLeft = new Button(new Left());
-    private Button buttonRight = new Button(new Right());
+    public int amountOfOptions = 3;
+    public int currentChoice = 1;
+    private Dictionary<string, Button> commands = new Dictionary<string, Button>();
+
+    public Navigation()
+    {
+        commands.Add("l", new Button(new Left(this)));
+        commands.Add("left", new Button(new Left(this)));
+        commands.Add("r", new Button(new Right(this)));
+        commands.Add("right", new Button(new Right(this)));
+        commands.Add("o", new Button(new Okej(this)));
+        commands.Add("k", new Button(new Okej(this)));
+        commands.Add("okej", new Button(new Okej(this)));
+        
+    }
+    
     public void DisplayNavigation()
     {
         for (int i = 0; i < amountOfOptions; i++)
@@ -22,5 +34,17 @@ public class Navigation
         Console.WriteLine("|");
 
         Console.WriteLine("Your buttons are Left, Right, OK, Back and Quit.");
+    }
+
+    public void LoopThroughCommands(string choice)
+    {
+        foreach (var comm in commands)
+        {
+            if (comm.Key.Equals(choice))
+            {
+                comm.Value.PushButton();
+            }
+
+        }
     }
 }

@@ -45,6 +45,11 @@ namespace WebShopCleanCode
             while (running)
             {
                 Console.WriteLine(info);
+                menu.DisplayMenu();
+                navigation.DisplayNavigation();
+                string Choice = Console.ReadLine();
+                navigation.LoopThroughCommands(Choice);
+                
                 
                 if (currentMenu.Equals("purchase menu"))
                 {
