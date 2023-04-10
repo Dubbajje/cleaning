@@ -2,20 +2,17 @@ namespace WebShopCleanCode;
 
 public class Back : ICommand
 {
-    
-    
-    private MenuContext context;
-    private WebShop webShop;
+    private readonly MenuContext _context;
+    private readonly WebShop _webShop;
     public Back(MenuContext context, WebShop webShop)
     {
-        this.context = context;
-        this.webShop = webShop;
+        _context = context;
+        _webShop = webShop;
     }
 
     public void Execute(int currentChoice)
     {
-        context.PreviousMenu();
-        webShop.currentChoice = 1;
-
+        _context.PreviousMenu();
+        _webShop.currentChoice = 1;
     }
 }

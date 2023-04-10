@@ -4,8 +4,9 @@
     {
         public static void Main(string[] args)
         {
-            WebShop webShop = new WebShop(new CustomerBuilder(), new OutputHandler(), new Database());
+            WebShop webShop = new WebShop(new OutputHandler(), new Database());
             webShop.Run();
         }
+        
     }
 }

@@ -55,8 +55,6 @@ public class CustomerBuilder
         return this;
     }
 
-    
-
     public Customer Build()
     {
         return new Customer(username, password, firstName, lastName, email, age, address, phoneNumber);

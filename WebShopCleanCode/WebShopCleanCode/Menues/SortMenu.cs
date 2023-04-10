@@ -12,7 +12,7 @@ public class SortMenu : IStateMenu
     private OutputHandler output;
     public Database db;
     private Sorting sorting;
-    
+
 
     public SortMenu(MenuContext context, OutputHandler output, Database db)
     {
@@ -21,7 +21,7 @@ public class SortMenu : IStateMenu
         string option3 = "Sort by price, descending";
         string option4 = "Sort by price, ascending";
         info = "How would you like to sort them?";
-        
+
         this.db = db;
         sorting = new Sorting(db);
         this.output = output;
@@ -33,48 +33,12 @@ public class SortMenu : IStateMenu
         options.Add(option4);
         nextChoice = new Dictionary<int, OptionDelegate>();
         this.context = context;
-        nextChoice.Add(1, () =>
-        {
-            sorting.quickSort("hej", true);
-        });
+        nextChoice.Add(1, () => { sorting.MergeSortByName(false); });
+        nextChoice.Add(2, () => { sorting.MergeSortByName(true); });
+        nextChoice.Add(3, () => { sorting.MergeSortByPrice(true); });
+        nextChoice.Add(4, () => { sorting.MergeSortByPrice(false); });
     }
-
-    public void SortOptions(int num)
-    {
-        switch(num)
-        {
-            case 1:
-                quickSort("name", false);
-                output.DisplayMessage("Wares sorted.");
-                break;
-            case 2:
-                quickSort("name", true);
-                output.DisplayMessage("Wares sorted.");
-                break;
-            case 3:
-                quickSort("price", false);
-                output.DisplayMessage("Wares sorted.");
-                break;
-            case 4:
-                quickSort("price", true);
-                output.DisplayMessage("Wares sorted.");
-                break;
-            default:
-                output.DisplayMessage("Not an option.");
-                break;
-            
-        }
-        
-    }
-
-    private void quickSort(string name, bool p1)
-    {
-        sorting.quickSort(name, p1);
-        sorting.quickSort(name, p1);
-        sorting.quickSort(name, p1);
-        sorting.quickSort(name, p1);
-    }
-
+    
 
     public void DisplayMenu()
     {
@@ -86,7 +50,18 @@ public class SortMenu : IStateMenu
 
     public void Execute(int currentChoice)
     {
-        Console.WriteLine("Hej");
+        foreach (var option in nextChoice)
+        {
+            if (option.Key == currentChoice )
+            {
+                option.Value();
+                output.DisplayMessage("Wares sorted");
+                PreviousMenu();
+                return;
+            }
+        }
+        output.DisplayMessage("Not an option.");
+        
     }
     public int GetAmountOfOptions()
     {
@@ -95,12 +70,17 @@ public class SortMenu : IStateMenu
 
     public void PreviousMenu()
     {
-        Console.WriteLine("get back");
+        context.SetWaresMenu();
+    }
+
+    public void SetLoggedInOptions()
+    {
+        
     }
 
     public void DisplayInfo()
     {
         Console.WriteLine(info);
     }
-    
+
 }

@@ -1,3 +1,5 @@
+using System.Runtime.Loader;
+
 namespace WebShopCleanCode;
 
 public class WaresMenu : IStateMenu
@@ -5,15 +7,19 @@ public class WaresMenu : IStateMenu
     public delegate void OptionDelegate();
     private Dictionary<int, OptionDelegate> nextChoice;
     private MenuContext context;
+    
     private WebShop webShop;
     private List<string> options;
     string info;
     private int amountOfOptions;
-    public WaresMenu(MenuContext context, WebShop webShop)
+    private OutputHandler output;
+    public WaresMenu(MenuContext context, WebShop webShop, OutputHandler output)
     {
         amountOfOptions = 4;
         this.context = context;
         this.webShop = webShop;
+        
+        this.output = output;
         options = new List<string>();
         options.Add("See all wares");
         options.Add("Purchase a ware");
@@ -23,13 +29,12 @@ public class WaresMenu : IStateMenu
         info = "What would you like to do?";
         nextChoice = new Dictionary<int, OptionDelegate>();
         nextChoice.Add(1, () => PrintEveryProduct());
-        nextChoice.Add(2, () => { Console.WriteLine("ny meny"); });
-        nextChoice.Add(3, () => { Console.WriteLine("nya meny"); });
-        nextChoice.Add(4, () => {
-            if (webShop.currentCustomer != null) { context.setLoginMenu(); }
-            Console.WriteLine("Nobody logged in");
-        });
+        nextChoice.Add(2, () => context.SetPurchaseMenu() );
+        nextChoice.Add(3, () => { context.SetSortMenu(); });
+        nextChoice.Add(4, () => { context.SetLoginMenu(); });
     }
+    
+    
     public void DisplayMenu()
     { 
         for (int i = 0; i < options.Count-1; i++)
@@ -54,6 +59,7 @@ public class WaresMenu : IStateMenu
             product.PrintInfo();
         }
     }
+    
     public void Execute(int currentChoice)
     {
         foreach (var option in nextChoice)
@@ -61,8 +67,10 @@ public class WaresMenu : IStateMenu
             if (option.Key == currentChoice )
             {
                 option.Value();
+                return;
             }
         }
+        output.DisplayMessage("Not an option.");
     }
     public int GetAmountOfOptions()
     {
@@ -71,7 +79,12 @@ public class WaresMenu : IStateMenu
 
     public void PreviousMenu()
     {
-        context.setMainMenuState();
+        context.SetMainMenuState();
+    }
+
+    public void SetLoggedInOptions()
+    {
+        
     }
 
     public void DisplayInfo()

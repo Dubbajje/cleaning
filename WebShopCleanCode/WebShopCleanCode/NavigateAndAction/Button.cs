@@ -8,18 +8,16 @@ namespace WebShopCleanCode
 {
     public class Button
     {
-        ICommand command;
+        private readonly ICommand _command;
         
-        public string Name { get; set; }
         public Button(ICommand command)
         {
-            this.command = command;
-            
+            _command = command;
         }
 
         public void PushButton(int currentChoice)
         {
-            command.Execute(currentChoice);
+            _command.Execute(currentChoice);
         }
     }
 }

@@ -2,94 +2,117 @@ namespace WebShopCleanCode;
 
 public class MenuContext
 {
-    IStateMenu mainMenu;
-    IStateMenu waresMenu;
-    IStateMenu customerInfoMenu;
-    IStateMenu sortMenu;
-    IStateMenu loginMenu;
-    IStateMenu purchaseMenu;
+    private readonly IStateMenu _mainMenu;
+    private readonly IStateMenu _waresMenu;
+    private readonly IStateMenu _customerInfoMenu;
+    private readonly IStateMenu _sortMenu;
+    private readonly IStateMenu _loginMenu;
+    private readonly IStateMenu _purchaseMenu;
 
-    IStateMenu iStateMenu;
-    private WebShop webshop;
-    private Database db;
+    private IStateMenu _iStateMenu;
+    private readonly WebShop _webshop;
+    private LoginContext _loginContext;
     
-    
-    public MenuContext(WebShop webShop, Database db)
+    private OutputHandler _output;
+
+
+    public MenuContext(WebShop webShop, Database db, OutputHandler output, LoginContext loginContext)
     {
-        this.webshop = webShop;
-        db = db;
-        mainMenu = new MainMenu(this);
-        waresMenu = new WaresMenu(this, webShop);
-        sortMenu = new SortMenu(this,new OutputHandler(), db );
-        loginMenu = new LoginMenu(this);
-        purchaseMenu = new PurchaseMenu(this);
-        customerInfoMenu = new CustomerInfoMenu(this);
-        this.iStateMenu = mainMenu;
+        _webshop = webShop;
+        _output = output;
+        _loginContext = loginContext;
+        _mainMenu = new MainMenu(this, output, _loginContext, _webshop);
+        _waresMenu = new WaresMenu(this, webShop, output);
+        _sortMenu = new SortMenu(this, output, db);
+        _loginMenu = new LoginMenu(this, output, webShop, new LoginHandler(db, webShop, output, this, _loginContext),_loginContext);
+        _purchaseMenu = new PurchaseMenu(this, db, webShop);
+        _customerInfoMenu = new CustomerInfoMenu(this, output, webShop);
+        _iStateMenu = _mainMenu;
         
+
     }
 
-    public void setMenuState(IStateMenu newState)
+    public void SetMainMenuState()
     {
-        iStateMenu = newState;
+        _mainMenu.SetLoggedInOptions();
+        _iStateMenu = _mainMenu;
+        _webshop.currentChoice = 1;
     }
 
-    public void setMainMenuState()
+    public void SetPurchaseMenu()
     {
-        iStateMenu = mainMenu;
+        if (_webshop.currentCustomer != null)
+        {
+            _iStateMenu = _purchaseMenu;
+            //_loginContext.LoginLogOut();
+            
+            
+        }
+        _output.DisplayMessage("You must be logged in to purchase wares.");
+        _webshop.currentChoice = 1;
     }
 
-    public void setPurchaseMenu()
+    public void SetWaresMenu()
     {
-        iStateMenu = purchaseMenu;
+        _iStateMenu = _waresMenu;
+        _webshop.currentChoice = 1;
     }
 
-    public void setWaresMenu()
+    public void SetSortMenu()
     {
-        iStateMenu = waresMenu;
+        _iStateMenu = _sortMenu;
+        _webshop.currentChoice = 1;
     }
 
-    public void setSortMenu()
+    public void SetLoginMenu()
     {
-        iStateMenu = sortMenu;
-    }
-    public void setLoginMenu()
-    {
-        iStateMenu = loginMenu;
+        /*if (_webshop.currentCustomer != null)
+        {
+            _iStateMenu = _loginMenu;
+            _webshop.currentChoice = 1;
+        }
+
+        
+        Console.WriteLine("Nobody logged in");*/
+        _iStateMenu = _loginMenu;
+        _webshop.currentChoice = 1;
     }
 
-    public void setCustomerInfoMenu()
+    public void SetCustomerInfoMenu()
     {
-        if (webshop.currentCustomer == null)
+        if (_webshop.currentCustomer == null)
         {
             Console.WriteLine("Nobody is logged in");
+            return;
         }
-        iStateMenu = customerInfoMenu;
+        _iStateMenu = _customerInfoMenu;
     }
+
     public void DisplayMenu()
     {
-        iStateMenu.DisplayMenu();
+        _iStateMenu.DisplayMenu();
+        
     }
 
     public IStateMenu GetContext()
     {
-        return iStateMenu;
+        return _iStateMenu;
     }
 
     public void DisplayInfo()
     {
-        iStateMenu.DisplayInfo();
+        _iStateMenu.DisplayInfo();
     }
 
     public int GetAmountOfOptions()
     {
-        return iStateMenu.GetAmountOfOptions();
+        return _iStateMenu.GetAmountOfOptions();
     }
 
     public void PreviousMenu()
     {
-        iStateMenu.PreviousMenu();
+        _iStateMenu.PreviousMenu();
+        
     }
-    
-
 
 }

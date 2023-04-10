@@ -2,70 +2,88 @@ namespace WebShopCleanCode;
 
 public class LoginMenu : IStateMenu
 {
-    MenuContext context;
-    List<string> options;
-    public delegate void OptionDelegate();
-    public Dictionary<int, OptionDelegate> nextChoice;
-    private string info;
-    public int amountOfOptions { get; set; }
-    public LoginMenu(MenuContext context)
-    {
-        
-        
-        //om costumer är null
-        string option1 = "Set Username";
-        string option2 = "Set Password";
-        string option3 = "Login";
-        string option4 = "Register";
-        amountOfOptions = 4;
-        info = "Please submit username and password.";
-        this.context = context;
-        options = new List<string>();
-        options.Add(option1);
-        options.Add(option2);
-        options.Add(option3);
-        options.Add(option4);
-        nextChoice = new Dictionary<int, OptionDelegate>();
-        nextChoice.Add(1, () => context.setWaresMenu());
-        nextChoice.Add(2, () => context.setCustomerInfoMenu());
+    readonly MenuContext _context;
+    private readonly List<string> _options;
 
-        //om customer inte är null
-        option4 = "Login";
-        //outputHandler.DisplayMessageWithArgument(currentCustomer.Username," logged out." );
-        //currentCustomer = null;
+    private delegate void OptionDelegate();
+    private readonly Dictionary<int, OptionDelegate> _nextChoice;
+    private string Info { get; }
+    private readonly OutputHandler _output;
+    private WebShop _webShop;
+    private int AmountOfOptions { get; }
+    private LoginHandler _loginHandler;
+    private Register _register;
+    public LoginMenu(MenuContext context, OutputHandler output, WebShop webShop, LoginHandler login, LoginContext loginContext)
+    {
+
+        AmountOfOptions = 4;
+        _webShop = webShop;
+        _output = output;
+        Info = "Please submit username and password.";
+        _context = context;
+        _loginHandler = login;
+        _register = new Register(output, _webShop, loginContext, context);
+        _options = new List<string>
         
+        {
+            "Set Username",
+            "Set Password",
+            "Login",
+            "Register"
+        };
+        _nextChoice = new Dictionary<int, OptionDelegate>
+        {
+            
+            {1, _loginHandler.SetUsername},
+            {2, _loginHandler.SetPassword},
+            {3, _loginHandler.Login},
+            {4, _register.RegistrerAllInformation}
+
+        };
+
     }
 
     public void DisplayMenu()
     {
-        for (int i = 0; i < options.Count; i++)
+        for (int i = 0; i < _options.Count; i++)
         {
-            Console.WriteLine(i+1 + ": " + options[i]);
+            Console.WriteLine(i+1 + ": " + _options[i]);
         }
     }
 
     public void Execute(int currentChoice)
     {
-        foreach (var option in nextChoice)
+        foreach (var option in _nextChoice)
         {
             if (option.Key == currentChoice )
             {
                 option.Value();
+                return;
             }
         }
+        _output.DisplayMessage("Not an option.");
     }
     public int GetAmountOfOptions()
     {
-        return amountOfOptions;
+        return AmountOfOptions;
     }
 
     public void PreviousMenu()
     {
-        context.setMainMenuState();
+        _context.SetMainMenuState();
+    }
+
+    public void SetLoggedInOptions()
+    {
+        
     }
 
     public void DisplayInfo()
     {
-        Console.WriteLine(info);
+        Console.WriteLine(Info);
     }
+    
+    
+    
+    
 }

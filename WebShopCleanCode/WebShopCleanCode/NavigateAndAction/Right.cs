@@ -2,19 +2,17 @@ namespace WebShopCleanCode;
 
 public class Right : ICommand
 {
-    Navigation navigation;
-    private WebShop webShop;
-    private MenuContext context;
-    public Right(Navigation navigation, WebShop webShop, MenuContext context)
+    private readonly WebShop _webShop;
+    private readonly MenuContext _context;
+    public Right(WebShop webShop, MenuContext context)
     {
-        this.navigation = navigation;
-        this.webShop = webShop;
-        this.context = context;
+        _webShop = webShop;
+        _context = context;
     }
 
     public void Execute(int currentChoice)
     {
-        if (webShop.currentChoice < context.GetAmountOfOptions()) 
-            webShop.currentChoice++;
+        if (_webShop.currentChoice < _context.GetAmountOfOptions()) 
+            _webShop.currentChoice++;
     }
 }

@@ -9,7 +9,7 @@ namespace WebShopCleanCode
     public class Customer
     {
         public string Username { get; set; }
-        private string password;
+        private string _password;
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Email { get; set; }
@@ -21,7 +21,7 @@ namespace WebShopCleanCode
         public Customer(string username, string password, string firstName, string lastName, string email, int age, string address, string phoneNumber)
         {
             Username = username;
-            this.password = password;
+            _password = password;
             FirstName = firstName;
             LastName = lastName;
             Email = email;
@@ -43,16 +43,16 @@ namespace WebShopCleanCode
             {
                 return true;
             }
-            return password.Equals(this.password);
+            return password.Equals(_password);
         }
 
         public void PrintInfo()
         {
             Console.WriteLine();
             Console.Write("Username: " + Username + "");
-            if (password != null)
+            if (_password != null)
             {
-                Console.Write(", Password: " + password);
+                Console.Write(", Password: " + _password);
             }
             if (FirstName != null)
             {
