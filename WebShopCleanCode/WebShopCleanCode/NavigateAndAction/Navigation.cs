@@ -4,6 +4,11 @@ namespace WebShopCleanCode;
 
 public class Navigation
 {
+    //In this class I create the buttons with commands that have different implementations
+    //of the Execute-method. 
+    //I store the Buttons in a dictionary. The valid user inputs is the key.
+    //The method LoopThroughCommands will take the user input and see if it matches the
+    //key in the dictionary. If it is a match the button will be executed.
     private readonly Dictionary<string, Button> _commands;
     private readonly MenuContext _context;
     private readonly WebShop _webShop;

@@ -10,7 +10,6 @@ public class FundsHandler
         _output = output;
         _webShop = webShop;
     }
-
     public void AddFunds()
     {
         Console.WriteLine("How many funds would you like to add?");

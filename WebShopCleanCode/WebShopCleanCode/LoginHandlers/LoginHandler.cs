@@ -1,3 +1,5 @@
+using System.Security.AccessControl;
+
 namespace WebShopCleanCode;
 
 public class LoginHandler
@@ -24,30 +26,31 @@ public class LoginHandler
         _loginContext = logincontext;
 
     }
-    public void SetPassword()
+
+    public string ReadCustomerInfo(string variable)
     {
         Console.WriteLine("A keyboard appears.");
-        Console.WriteLine("Please input your password.");
-        password = Console.ReadLine();
+        Console.WriteLine("Please input your " + variable +".");
+        string customerInfo = Console.ReadLine();
         Console.WriteLine();
+        return customerInfo;
+
+    }
+    public void SetPassword()
+    {
+        password = ReadCustomerInfo("password");
     }
 
     public void SetUsername()
     {
-        Console.WriteLine("A keyboard appears.");
-        Console.WriteLine("Please input your username.");
-        username = Console.ReadLine();
-        Console.WriteLine();
-        
+        username = ReadCustomerInfo("username");
     }
 
     private bool IsIncompleteData()
     {
         if (username == null || password == null)
         {
-            Console.WriteLine();
-            Console.WriteLine("Incomplete data.");
-            Console.WriteLine();
+            output.DisplayMessage("Incomplete data.");
             return true;
         }
         return false;

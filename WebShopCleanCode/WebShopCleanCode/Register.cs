@@ -36,7 +36,7 @@ public class Register
         Console.WriteLine(newCustomer.Username);
         output.DisplayMessageWithArgument(newCustomer.Username, " successfully added and is now logged in.");
         SetLoggedInContexts();
-        //Spara i databasen
+        
     }
 
     public void SetLoggedInContexts()
@@ -104,7 +104,7 @@ public class Register
                     catch (FormatException e)
                     {
                         output.DisplayMessage("Please write a number.");
-                        continue;
+                        
                     }
                 }
             }
@@ -119,21 +119,21 @@ public class Register
     }
 
 
-    private string RegisterUserInformation(String questionYN, string question)
+    private string RegisterUserInformation(String indefiniteVariable, string variable)
     {
         string choice;
         string userInformation;
         while (true)
         {
-            Console.WriteLine("Do you want " + questionYN + "? y/n");
+            Console.WriteLine("Do you want " + indefiniteVariable + "? y/n");
             choice = Console.ReadLine();
             if (choice.Equals("y"))
             {
                 while (true)
                 {
-                    Console.WriteLine("Please write your " + question + ".");
+                    Console.WriteLine("Please write your " + variable + ".");
                     userInformation = Console.ReadLine();
-                    if (userInformation.Equals(null))
+                    if (userInformation.Equals(""))
                     {
                         output.DisplayMessage("Please actually write something.");
                         continue;
@@ -152,7 +152,5 @@ public class Register
 
         }
     }
-
-
 }
 

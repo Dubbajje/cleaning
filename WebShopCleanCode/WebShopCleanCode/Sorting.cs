@@ -2,6 +2,7 @@ namespace WebShopCleanCode;
 
 public class Sorting
 {
+    //I have changed Bubblesort to Mergesort
 
 
     private Database db;

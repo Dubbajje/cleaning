@@ -2,6 +2,10 @@ namespace WebShopCleanCode;
 
 public class CustomerBuilder
 {
+    //This is the design pattern "Builder". Here we Build the customer.
+    //The default values will be set through the builder instead of having
+    //many different constructors in the Customer class.
+    
     private string username ="";
     private string password = "";
     private string firstName = "";

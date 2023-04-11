@@ -25,7 +25,6 @@ public class WaresMenu : IStateMenu
         options.Add("Purchase a ware");
         options.Add("Sort wares");
         options.Add("Login");
-        //logout
         info = "What would you like to do?";
         nextChoice = new Dictionary<int, OptionDelegate>();
         nextChoice.Add(1, () => PrintEveryProduct());

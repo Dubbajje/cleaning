@@ -2,6 +2,11 @@ namespace WebShopCleanCode;
 
 public class MenuContext
 {
+    //This is a part of the State pattern.
+    //This class handles the different concrete contexts
+    //The State pattern uses different implementations of the Istate interface
+    //When you switch the context you will get another menu.
+    
     private readonly IStateMenu _mainMenu;
     private readonly IStateMenu _waresMenu;
     private readonly IStateMenu _customerInfoMenu;
@@ -44,9 +49,6 @@ public class MenuContext
         if (_webshop.CurrentCustomer != null)
         {
             _iStateMenu = _purchaseMenu;
-            //_loginContext.LoginLogOut();
-            
-            
         }
         _output.DisplayMessage("You must be logged in to purchase wares.");
         _webshop.CurrentChoice = 1;
@@ -66,14 +68,6 @@ public class MenuContext
 
     public void SetLoginMenu()
     {
-        /*if (_webshop.currentCustomer != null)
-        {
-            _iStateMenu = _loginMenu;
-            _webshop.currentChoice = 1;
-        }
-
-        
-        Console.WriteLine("Nobody logged in");*/
         _iStateMenu = _loginMenu;
         _webshop.CurrentChoice = 1;
     }

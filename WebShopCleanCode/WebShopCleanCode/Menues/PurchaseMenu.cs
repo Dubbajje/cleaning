@@ -54,10 +54,8 @@ public class PurchaseMenu : IStateMenu
     public void SetLoggedInOptions()
     {
         Options[3] = "Logout";
-        
     }
     
-
     public void DisplayMenu()
     {
         AmountOfOptions = _products.Count;
