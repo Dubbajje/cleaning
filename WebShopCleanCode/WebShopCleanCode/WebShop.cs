@@ -13,26 +13,22 @@ namespace WebShopCleanCode
     {
         bool running = true;
         private Database database;
-        public List<Product> products { get; set; } = new List<Product>();
-        public List<Customer> customers = new List<Customer>();
-        private OutputHandler outputHandler;
+        public List<Product> Products { get; set; }
+        public List<Customer> Customers;
+        
         private MenuContext context;
         private Navigation navigation;
         private LoginContext _loginContext;
-
-
-        public Customer currentCustomer { get; set; }
-        public int currentChoice;
+        public Customer CurrentCustomer { get; set; }
+        public int CurrentChoice;
         
-
 
         public WebShop(OutputHandler outputHandler, Database database)
         {
-            currentChoice = 1;
-            currentCustomer = null;
-            products = database.GetProducts();
-            customers = database.GetCustomers();
-            this.outputHandler = outputHandler;
+            CurrentChoice = 1;
+            CurrentCustomer = null;
+            Products = database.GetProducts();
+            Customers = database.GetCustomers();
             _loginContext = new LoginContext(this);
             context = new MenuContext(this, database, outputHandler, _loginContext);
             navigation = new Navigation(context, this);
@@ -48,9 +44,8 @@ namespace WebShopCleanCode
                 context.DisplayMenu();
                 navigation.DisplayNavigation();
                 _loginContext.ShowCustomerLoggedIn();
-                string Choice = Console.ReadLine().ToLower();
-                navigation.LoopThroughCommands(Choice, currentChoice);
-                
+                string choice = Console.ReadLine().ToLower();
+                navigation.LoopThroughCommands(choice, CurrentChoice);
             }
         }
     }

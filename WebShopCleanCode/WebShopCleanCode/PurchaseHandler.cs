@@ -16,15 +16,15 @@ public class PurchaseHandler
     }
     public void Purchase()
     {
-        int index = _webShop.currentChoice - 1;
+        int index = _webShop.CurrentChoice - 1;
         Product product = products[index];
         if (product.InStock())
         {
-            if (_webShop.currentCustomer.CanAfford(product.Price))
+            if (_webShop.CurrentCustomer.CanAfford(product.Price))
             {
-                _webShop.currentCustomer.Funds -= product.Price;
+                _webShop.CurrentCustomer.Funds -= product.Price;
                 product.NrInStock--;
-                _webShop.currentCustomer.Orders.Add(new Order(product.Name, product.Price, DateTime.Now));
+                _webShop.CurrentCustomer.Orders.Add(new Order(product.Name, product.Price, DateTime.Now));
                 _output.DisplayMessageWithArgument("Successfully bought ", product.Name);
             }
             else

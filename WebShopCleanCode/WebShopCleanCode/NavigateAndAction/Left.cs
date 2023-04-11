@@ -10,7 +10,7 @@ public class Left : ICommand
 
     public void Execute(int currentChoice)
     {
-        if(_webShop.currentChoice > 1) 
-            _webShop.currentChoice--;
+        if(_webShop.CurrentChoice > 1) 
+            _webShop.CurrentChoice--;
     }
 }

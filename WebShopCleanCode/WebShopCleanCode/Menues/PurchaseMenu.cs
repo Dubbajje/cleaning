@@ -66,7 +66,7 @@ public class PurchaseMenu : IStateMenu
             Console.WriteLine(i + 1 + ": " + _products[i].Name + ", " + _products[i].Price + "kr");
         }
 
-        Console.WriteLine("Your funds: " + _webShop.currentCustomer.Funds);
+        Console.WriteLine("Your funds: " + _webShop.CurrentCustomer.Funds);
     }
 
     public void Execute(int currentChoice)

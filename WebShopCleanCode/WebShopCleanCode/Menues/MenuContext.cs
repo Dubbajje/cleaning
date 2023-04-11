@@ -36,12 +36,12 @@ public class MenuContext
     {
         _mainMenu.SetLoggedInOptions();
         _iStateMenu = _mainMenu;
-        _webshop.currentChoice = 1;
+        _webshop.CurrentChoice = 1;
     }
 
     public void SetPurchaseMenu()
     {
-        if (_webshop.currentCustomer != null)
+        if (_webshop.CurrentCustomer != null)
         {
             _iStateMenu = _purchaseMenu;
             //_loginContext.LoginLogOut();
@@ -49,19 +49,19 @@ public class MenuContext
             
         }
         _output.DisplayMessage("You must be logged in to purchase wares.");
-        _webshop.currentChoice = 1;
+        _webshop.CurrentChoice = 1;
     }
 
     public void SetWaresMenu()
     {
         _iStateMenu = _waresMenu;
-        _webshop.currentChoice = 1;
+        _webshop.CurrentChoice = 1;
     }
 
     public void SetSortMenu()
     {
         _iStateMenu = _sortMenu;
-        _webshop.currentChoice = 1;
+        _webshop.CurrentChoice = 1;
     }
 
     public void SetLoginMenu()
@@ -75,12 +75,12 @@ public class MenuContext
         
         Console.WriteLine("Nobody logged in");*/
         _iStateMenu = _loginMenu;
-        _webshop.currentChoice = 1;
+        _webshop.CurrentChoice = 1;
     }
 
     public void SetCustomerInfoMenu()
     {
-        if (_webshop.currentCustomer == null)
+        if (_webshop.CurrentCustomer == null)
         {
             Console.WriteLine("Nobody is logged in");
             return;

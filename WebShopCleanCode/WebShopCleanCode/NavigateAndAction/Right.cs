@@ -12,7 +12,7 @@ public class Right : ICommand
 
     public void Execute(int currentChoice)
     {
-        if (_webShop.currentChoice < _context.GetAmountOfOptions()) 
-            _webShop.currentChoice++;
+        if (_webShop.CurrentChoice < _context.GetAmountOfOptions()) 
+            _webShop.CurrentChoice++;
     }
 }

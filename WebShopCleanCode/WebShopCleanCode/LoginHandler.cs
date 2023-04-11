@@ -63,7 +63,7 @@ public class LoginHandler
                 if (username.Equals(customer.Username) && customer.CheckPassword(password))
                 {
                     output.DisplayMessageWithArgument(customer.Username, " logged in.");
-                    webShop.currentCustomer = customer;
+                    webShop.CurrentCustomer = customer;
                     found = true;
                     _loginContext.SetLoggedIn();
                     _context.SetMainMenuState();

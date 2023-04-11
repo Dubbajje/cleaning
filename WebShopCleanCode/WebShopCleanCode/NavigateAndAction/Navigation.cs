@@ -35,7 +35,7 @@ public class Navigation
             Console.Write(i + 1 + "\t");
         }
         Console.WriteLine();
-        for (int i = 1; i < _webShop.currentChoice; i++)
+        for (int i = 1; i < _webShop.CurrentChoice; i++)
         {
             Console.Write("\t");
         }

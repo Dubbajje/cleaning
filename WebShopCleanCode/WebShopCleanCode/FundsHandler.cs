@@ -24,7 +24,7 @@ public class FundsHandler
             }
             else
             {
-                _webShop.currentCustomer.Funds += amount;
+                _webShop.CurrentCustomer.Funds += amount;
                 _output.DisplayMessageWithArgument(amountString, " added to your profile.");
             }
         }

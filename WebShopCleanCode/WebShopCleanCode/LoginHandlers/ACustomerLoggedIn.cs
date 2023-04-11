@@ -16,7 +16,7 @@ public class ACustomerLoggedIn : ILoginState
     }
     public void ShowCustomerLoggedIn()
     {
-        Console.WriteLine("Current user: " + _webShop.currentCustomer.Username);
+        Console.WriteLine("Current user: " + _webShop.CurrentCustomer.Username);
     }
 
     
@@ -29,10 +29,10 @@ public class ACustomerLoggedIn : ILoginState
 
     public void LoginLogout()
     {
-        _output.DisplayMessageWithArgument(_webShop.currentCustomer.Username, " logged out.");
+        _output.DisplayMessageWithArgument(_webShop.CurrentCustomer.Username, " logged out.");
         _loginContext.SetNoCustomerLoggedIn();
-        _webShop.currentCustomer = null;
-        _webShop.currentChoice = 1;
+        _webShop.CurrentCustomer = null;
+        _webShop.CurrentChoice = 1;
         
 
     }

@@ -42,7 +42,7 @@ public class WaresMenu : IStateMenu
             Console.WriteLine(i+1 + ": " + options[i]);
         }
 
-        if (webShop.currentCustomer == null)
+        if (webShop.CurrentCustomer == null)
         {
             Console.WriteLine("4: Login");
         }
@@ -54,7 +54,7 @@ public class WaresMenu : IStateMenu
 
     private void PrintEveryProduct()
     {
-        foreach (Product product in webShop.products)
+        foreach (Product product in webShop.Products)
         {
             product.PrintInfo();
         }

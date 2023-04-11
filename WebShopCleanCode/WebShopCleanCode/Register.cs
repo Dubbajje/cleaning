@@ -31,8 +31,8 @@ public class Register
             .SetFirstname(firstName).SetLastname(lastName).SetEmail(email).SetAge(age).SetAddress(address)
             .SetPhoneNumber(phoneNumber)
             .Build();
-        _webShop.customers.Add(newCustomer);
-        _webShop.currentCustomer = newCustomer;
+        _webShop.Customers.Add(newCustomer);
+        _webShop.CurrentCustomer = newCustomer;
         Console.WriteLine(newCustomer.Username);
         output.DisplayMessageWithArgument(newCustomer.Username, " successfully added and is now logged in.");
         SetLoggedInContexts();
@@ -45,33 +45,41 @@ public class Register
         _menuContext.SetMainMenuState();
     }
 
-    public void EnterUsername() //login op4
+    public bool DoesUsernameExist()
     {
+        bool validUsername;
+        
         Console.WriteLine("Please write your username.");
         userName = Console.ReadLine();
-        foreach (Customer customer in _webShop.customers)
+        foreach (Customer customer in _webShop.Customers)
         {
             if (customer.Username.Equals(userName))
             {
                 output.DisplayMessage("Username already exists.");
-                return;
+                validUsername = false;
+                return validUsername;
             }
         }
+        validUsername = true;
+        return validUsername;
         // Would have liked to be able to quit at any time in here.
 
     }
 
     public void RegistrerAllInformation()
     {
-        EnterUsername();
-        password = RegistrerUserInformation("a password", "password");
-        firstName = RegistrerUserInformation("a first name", "first name");
-        lastName = RegistrerUserInformation("a last name", "last name");
-        age = DoYouWantAge();
-        email = RegistrerUserInformation("an email", "email");
-        address = RegistrerUserInformation("an address", "address");
-        phoneNumber = RegistrerUserInformation("a phone number", "phone number");
-        CreateCustomer();
+        bool CanCreateACustomer = DoesUsernameExist();
+        if (CanCreateACustomer)
+        {
+            password = RegisterUserInformation("a password", "password");
+            firstName = RegisterUserInformation("a first name", "first name");
+            lastName = RegisterUserInformation("a last name", "last name");
+            age = DoYouWantAge();
+            email = RegisterUserInformation("an email", "email");
+            address = RegisterUserInformation("an address", "address");
+            phoneNumber = RegisterUserInformation("a phone number", "phone number");
+            CreateCustomer();
+        }
 
     }
 
@@ -111,7 +119,7 @@ public class Register
     }
 
 
-    private string RegistrerUserInformation(String questionYN, string question)
+    private string RegisterUserInformation(String questionYN, string question)
     {
         string choice;
         string userInformation;
@@ -130,7 +138,6 @@ public class Register
                         output.DisplayMessage("Please actually write something.");
                         continue;
                     }
-
                     return userInformation;
                 }
 

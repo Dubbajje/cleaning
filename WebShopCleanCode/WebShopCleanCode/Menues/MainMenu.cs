@@ -38,7 +38,7 @@ public class MainMenu : IStateMenu
 
     public void SetLoggedInOptions()
     {
-        if (_webShop.currentCustomer != null)
+        if (_webShop.CurrentCustomer != null)
         {
             Options[2] = "Logout";
             _nextChoice[3] = () =>

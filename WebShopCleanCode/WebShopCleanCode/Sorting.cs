@@ -9,39 +9,8 @@ public class Sorting
     public Sorting(Database db)
     {
         this.db = db;
-        List<Product> products = db.GetProducts();
 
     }
-
-    public void MergeSort(List<Product> products, bool ascending)
-    {
-        if (products.Count <= 1)
-        {
-            return;
-        }
-
-        int middle = products.Count / 2;
-        List<Product> left = new List<Product>();
-        List<Product> right = new List<Product>();
-
-        for (int i = 0; i < middle; i++)
-        {
-            left.Add(products[i]);
-        }
-
-        for (int i = middle; i < products.Count; i++)
-        {
-            right.Add(products[i]);
-        }
-
-        MergeSort(left, ascending);
-        MergeSort(right, ascending);
-
-        Merge(left, right, products, ascending);
-    }
-
-    
-
     public void MergeSortByName( bool ascending)
     {
         
@@ -52,45 +21,7 @@ public class Sorting
     {
         MergeSort(db.GetProducts(), "price", ascending);
     }
-
-
-    private void Merge(List<Product> left, List<Product> right, List<Product> products, bool ascending)
-    {
-        int leftIndex = 0;
-        int rightIndex = 0;
-        int productsIndex = 0;
-
-        while (leftIndex < left.Count && rightIndex < right.Count)
-        {
-            if ((ascending && left[leftIndex].Price < right[rightIndex].Price) ||
-                (!ascending && left[leftIndex].Price > right[rightIndex].Price))
-            {
-                products[productsIndex] = left[leftIndex];
-                leftIndex++;
-            }
-            else
-            {
-                products[productsIndex] = right[rightIndex];
-                rightIndex++;
-            }
-
-            productsIndex++;
-        }
-
-        while (leftIndex < left.Count)
-        {
-            products[productsIndex] = left[leftIndex];
-            leftIndex++;
-            productsIndex++;
-        }
-
-        while (rightIndex < right.Count)
-        {
-            products[productsIndex] = right[rightIndex];
-            rightIndex++;
-            productsIndex++;
-        }
-    }
+    
 
     private void MergeSort(List<Product> products, string variable, bool ascending)
     {

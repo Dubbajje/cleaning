@@ -41,13 +41,13 @@ public class CustomerInfoMenu : IStateMenu
 
     private void PrintOrders()
     {
-        _webShop.currentCustomer.PrintOrders();
+        _webShop.CurrentCustomer.PrintOrders();
 
     }
 
     private void PrintInfo()
     {
-        _webShop.currentCustomer.PrintInfo();
+        _webShop.CurrentCustomer.PrintInfo();
     }
 
     public void DisplayMenu()

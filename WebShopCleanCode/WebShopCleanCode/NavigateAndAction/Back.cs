@@ -13,6 +13,6 @@ public class Back : ICommand
     public void Execute(int currentChoice)
     {
         _context.PreviousMenu();
-        _webShop.currentChoice = 1;
+        _webShop.CurrentChoice = 1;
     }
 }
