@@ -8,9 +8,7 @@ public class ACustomerLoggedIn : ILoginState
     public ACustomerLoggedIn(LoginContext loginContext, WebShop webShop, OutputHandler output)
     {
         _loginContext = loginContext;
-        
         _webShop = webShop;
-        
         _output = output;
 
     }
@@ -25,5 +23,6 @@ public class ACustomerLoggedIn : ILoginState
         _loginContext.SetNoCustomerLoggedIn();
         _webShop.CurrentCustomer = null;
         _webShop.CurrentChoice = 1;
+        
     }
 }

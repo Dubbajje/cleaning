@@ -36,6 +36,7 @@ public class LoginHandler
         return customerInfo;
 
     }
+    
     public void SetPassword()
     {
         password = ReadCustomerInfo("password");

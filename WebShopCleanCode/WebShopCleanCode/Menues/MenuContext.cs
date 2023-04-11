@@ -6,7 +6,6 @@ public class MenuContext
     //This class handles the different concrete contexts
     //The State pattern uses different implementations of the Istate interface
     //When you switch the context you will get another menu.
-    
     private readonly IStateMenu _mainMenu;
     private readonly IStateMenu _waresMenu;
     private readonly IStateMenu _customerInfoMenu;

@@ -2,23 +2,22 @@ namespace WebShopCleanCode;
 
 public class Register
 {
-    private string userName;
-    private string password;
-    private string newPassword;
-    private string firstName;
-    private string lastName;
-    private string email;
-    private int age;
-    private string address;
-    private string phoneNumber;
-    private OutputHandler output;
-    private WebShop _webShop;
-    private LoginContext _loginContext;
-    private MenuContext _menuContext;
+    private string _userName;
+    private string _password;
+    private string _firstName;
+    private string _lastName;
+    private string _email;
+    private int _age;
+    private string _address;
+    private string _phoneNumber;
+    private OutputHandler _output;
+    private readonly WebShop _webShop;
+    private readonly LoginContext _loginContext;
+    private readonly MenuContext _menuContext;
 
     public Register(OutputHandler output, WebShop webShop, LoginContext logincontext, MenuContext context)
     {
-        this.output = output;
+        _output = output;
         _webShop = webShop;
         _loginContext = logincontext;
         _menuContext = context;
@@ -27,19 +26,19 @@ public class Register
     public void CreateCustomer()
     {
         CustomerBuilder customerBuilder = new CustomerBuilder();
-        Customer newCustomer = customerBuilder.SetUsername(userName).SetPassword(password)
-            .SetFirstname(firstName).SetLastname(lastName).SetEmail(email).SetAge(age).SetAddress(address)
-            .SetPhoneNumber(phoneNumber)
+        Customer newCustomer = customerBuilder.SetUsername(_userName).SetPassword(_password)
+            .SetFirstname(_firstName).SetLastname(_lastName).SetEmail(_email).SetAge(_age).SetAddress(_address)
+            .SetPhoneNumber(_phoneNumber)
             .Build();
         _webShop.Customers.Add(newCustomer);
         _webShop.CurrentCustomer = newCustomer;
         Console.WriteLine(newCustomer.Username);
-        output.DisplayMessageWithArgument(newCustomer.Username, " successfully added and is now logged in.");
+        _output.DisplayMessageWithArgument(newCustomer.Username, " successfully added and is now logged in.");
         SetLoggedInContexts();
         
     }
 
-    public void SetLoggedInContexts()
+    private void SetLoggedInContexts()
     {
         _loginContext.SetLoggedIn();
         _menuContext.SetMainMenuState();
@@ -50,12 +49,12 @@ public class Register
         bool validUsername;
         
         Console.WriteLine("Please write your username.");
-        userName = Console.ReadLine();
+        _userName = Console.ReadLine();
         foreach (Customer customer in _webShop.Customers)
         {
-            if (customer.Username.Equals(userName))
+            if (customer.Username.Equals(_userName))
             {
-                output.DisplayMessage("Username already exists.");
+                _output.DisplayMessage("Username already exists.");
                 validUsername = false;
                 return validUsername;
             }
@@ -71,13 +70,13 @@ public class Register
         bool CanCreateACustomer = DoesUsernameExist();
         if (CanCreateACustomer)
         {
-            password = RegisterUserInformation("a password", "password");
-            firstName = RegisterUserInformation("a first name", "first name");
-            lastName = RegisterUserInformation("a last name", "last name");
-            age = DoYouWantAge();
-            email = RegisterUserInformation("an email", "email");
-            address = RegisterUserInformation("an address", "address");
-            phoneNumber = RegisterUserInformation("a phone number", "phone number");
+            _password = RegisterUserInformation("a password", "password");
+            _firstName = RegisterUserInformation("a first name", "first name");
+            _lastName = RegisterUserInformation("a last name", "last name");
+            _age = DoYouWantAge();
+            _email = RegisterUserInformation("an email", "email");
+            _address = RegisterUserInformation("an address", "address");
+            _phoneNumber = RegisterUserInformation("a phone number", "phone number");
             CreateCustomer();
         }
 
@@ -98,12 +97,12 @@ public class Register
                     string ageString = Console.ReadLine();
                     try
                     {
-                        age = int.Parse(ageString);
-                        return age;
+                        _age = int.Parse(ageString);
+                        return _age;
                     }
                     catch (FormatException e)
                     {
-                        output.DisplayMessage("Please write a number.");
+                        _output.DisplayMessage("Please write a number.");
                         
                     }
                 }
@@ -114,7 +113,7 @@ public class Register
                 return -1;
             }
 
-            output.DisplayMessage("y or n, please.");
+            _output.DisplayMessage("y or n, please.");
         }
     }
 
@@ -135,7 +134,7 @@ public class Register
                     userInformation = Console.ReadLine();
                     if (userInformation.Equals(""))
                     {
-                        output.DisplayMessage("Please actually write something.");
+                        _output.DisplayMessage("Please actually write something.");
                         continue;
                     }
                     return userInformation;
@@ -148,7 +147,7 @@ public class Register
                 return null;
             }
 
-            output.DisplayMessage("y or n, please.");
+            _output.DisplayMessage("y or n, please.");
 
         }
     }

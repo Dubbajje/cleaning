@@ -5,27 +5,15 @@ public class LoginContext
     ILoginState loggedIn;
     ILoginState notLoggedIn;
     ILoginState iLoginState;
-    private WebShop webShop;
     private Customer currentCustomer;
-    
-    
-
 
     public LoginContext(WebShop webShop)
     {
-        this.webShop = webShop;
         currentCustomer = null;
-        loggedIn = new ACustomerLoggedIn(this, this.webShop, new OutputHandler());
+        loggedIn = new ACustomerLoggedIn(this, webShop, new OutputHandler());
         notLoggedIn = new NoCustomerLoggedIn(this, new OutputHandler());
-        
-        
         iLoginState = notLoggedIn;
         
-    }
-
-    public void setLoggedInState(ILoginState newLoginState)
-    {
-        iLoginState = newLoginState;
     }
 
     public void SetLoggedIn()
